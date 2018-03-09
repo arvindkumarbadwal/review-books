@@ -1,0 +1,14 @@
+{
+    "platform" : [
+        {
+            "name" : "Admin",
+            "folder" : "admin",
+            "prefix" : "/admin" 
+        },
+        {
+            "name": "API",
+            "folder": "api",
+            "prefix": "/api/v1"
+        }
+    ]
+}
