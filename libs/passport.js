@@ -6,7 +6,8 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 
-var User = require('../models/user');
+var User = require(__base+'models/user');
+var Admin = require(__base +'models/admin');
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);
@@ -19,7 +20,7 @@ passport.deserializeUser(function(id, done) {
 });
 
 // Sign in with Email and Password
-passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, password, done) {
+passport.use('user-local', new LocalStrategy({ usernameField: 'email' }, function(email, password, done) {
   User.findOne({ email: email }, function(err, user) {
     if (!user) {
       return done(null, false, { msg: 'The email address ' + email + ' is not associated with any account. ' +
@@ -30,6 +31,24 @@ passport.use(new LocalStrategy({ usernameField: 'email' }, function(email, passw
         return done(null, false, { msg: 'Invalid email or password' });
       }
       return done(null, user);
+    });
+  });
+}));
+
+// Sign in with Email and Password
+passport.use('admin-local', new LocalStrategy({ usernameField: 'email' }, function (email, password, done) {
+  Admin.findOne({ email: email }, function (err, admin) {
+    if (!admin) {
+      return done(null, false, {
+        msg: 'The email address ' + email + ' is not associated with any account. ' +
+          'Double-check your email address and try again.'
+      });
+    }
+    admin.comparePassword(password, function (err, isMatch) {
+      if (!isMatch) {
+        return done(null, false, { msg: 'Invalid email or password' });
+      }
+      return done(null, admin);
     });
   });
 }));

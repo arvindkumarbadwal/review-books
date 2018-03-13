@@ -32,7 +32,7 @@ exports.loginPost = function(req, res, next) {
     return res.redirect('/login');
   }
 
-  passport.authenticate('local', function(err, user, info) {
+  passport.authenticate('user-local', function(err, user, info) {
     if (!user) {
       req.flash('error', info);
       return res.redirect('/login')

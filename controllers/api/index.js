@@ -4,7 +4,7 @@ const passport = require("passport");
 exports.auth = passport.authenticate('jwt', { session: false });
 
 exports.login = function (req, res) {
-    passport.authenticate('local', { session: false }, (err, user, info) => {
+    passport.authenticate('user-local', { session: false }, (err, user, info) => {
         if (err || !user) {
             return res.status(400).json(info);
         }

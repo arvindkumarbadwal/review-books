@@ -1,5 +1,6 @@
 module.exports = router => {
     router.group('/admin', router => {
-        router.get('/authors', controller('author', 'author_list'));
+        router.get('/login', controller('admin/account', 'loginGet'));
+        router.post('/login', controller('admin/account', 'loginPost'));
     })
 }

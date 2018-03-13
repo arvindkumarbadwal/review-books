@@ -9,6 +9,7 @@ var compression = require('compression');
 var helmet = require('helmet');
 var methodOverride = require('method-override');
 var session = require('express-session');
+var MongoStore = require('connect-mongo')(session);
 var flash = require('express-flash');
 var bodyParser = require('body-parser');
 var expressValidator = require('express-validator');
@@ -40,7 +41,14 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 app.use(methodOverride('_method'));
-app.use(session({ secret: process.env.SESSION_SECRET, resave: true, saveUninitialized: true }));
+app.use(session({
+  secret: process.env.SESSION_SECRET, 
+  resave: true, saveUninitialized: true, 
+  store: new MongoStore({
+    url: process.env.MONGODB,
+    ttl: 60 * 60
+  })
+}));
 app.use(flash());
 app.use(passport.initialize());
 app.use(passport.session());
