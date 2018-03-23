@@ -1,6 +1,7 @@
 // Load environment variables from .env file
 require('dotenv').config();
 global.__base = __dirname + '/';
+global.__base_url = 'http://localhost:3000/';
 
 var express = require('express');
 var path = require('path');
@@ -54,6 +55,7 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(function(req, res, next) {
   res.locals.user = req.user;
+  res.locals.asset_url = asset_url;
   next();
 });
 

@@ -6,8 +6,8 @@ var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var JwtStrategy = require('passport-jwt').Strategy;
 var ExtractJwt = require('passport-jwt').ExtractJwt;
 
-var User = require(__base+'models/user');
-var Admin = require(__base +'models/admin');
+var User = requireModel('user');
+var Admin = requireModel('admin');
 
 passport.serializeUser(function(user, done) {
   done(null, user.id);

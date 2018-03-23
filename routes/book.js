@@ -1,4 +1,4 @@
-const book_controller = require('../controllers/book');
+const book_controller = requireController('book');
 
 module.exports = router => {
     // GET catalog home page.

@@ -1,4 +1,4 @@
-const book_instance_controller = require('../controllers/bookinstance');
+const book_instance_controller = requireController('bookinstance');
 
 module.exports = router => {
     // GET request for creating a BookInstance. NOTE This must come before route that displays BookInstance (uses id).

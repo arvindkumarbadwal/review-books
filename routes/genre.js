@@ -1,4 +1,4 @@
-const genre_controller = require('../controllers/genre');
+const genre_controller = requireController('genre');
 
 module.exports = router => {
     // GET request for creating a Genre. NOTE This must come before route that displays Genre (uses id).

@@ -1,12 +1,12 @@
 const passport = require('passport');
 
 //Middlewares
-const auth = require('../middlewares/auth');
+const auth = requireMiddleware('auth');
 
 // Controllers
-const HomeController = require('../controllers/home');
-const userController = require('../controllers/user');
-const contactController = require('../controllers/contact');
+const HomeController = requireController('home');
+const userController = requireController('user');
+const contactController = requireController('contact');
 
 module.exports = router => {
     router.get('/', HomeController.index);

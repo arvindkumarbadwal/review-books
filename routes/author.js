@@ -1,4 +1,4 @@
-const author_controller = require('../controllers/author');
+const author_controller = requireController('author');
 
 module.exports = router => {
     // GET request for creating Author. NOTE This must come before route for id (i.e. display author).
